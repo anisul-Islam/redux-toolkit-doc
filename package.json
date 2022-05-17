@@ -1,0 +1,23 @@
+{
+  "name": "redux-tutorial-2022",
+  "version": "1.0.0",
+  "description": "## 1. Introduction to Redux",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anisul-Islam/redux-tutorial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anisul-Islam/redux-tutorial/issues"
+  },
+  "homepage": "https://github.com/anisul-Islam/redux-tutorial#readme",
+  "dependencies": {
+    "redux": "^4.2.0"
+  }
+}
