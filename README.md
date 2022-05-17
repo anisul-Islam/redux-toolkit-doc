@@ -21,3 +21,37 @@
 - dispatch an Action.
 - Reducer update state based on Action Type.
 - store will update the view
+
+## 2. redux core concept
+
+- State: consider what states you want to manage
+
+  ```js
+  // define states
+  count: 0;
+  const initialState = { count: 0 };
+  const initialState2 = { users: [{ name: "anisul islam" }] };
+  ```
+
+- Action: actions are object that have 2 things- type & payload
+
+  ```js
+  // define constants
+  const INCREMENT = "INCREMENT";
+  const DECREMENT = "DECREMENT";
+  const ADD_USER = "ADD_USER";
+
+  // dispatch(Action)
+  {
+    type: INCREMENT,
+  }
+  {
+    type: DECREMENT,
+  }
+  {
+    type: ADD_USER,
+    payload: {
+      name: "rafiqul islam",
+    }
+  }
+  ```
