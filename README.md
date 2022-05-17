@@ -21,7 +21,9 @@
 - dispatch an Action.
 - Reducer update state based on Action Type.
 - store will update the view
-<<<<<<< HEAD
+
+<img width="745" alt="Screenshot 2022-05-17 at 19 37 57" src="https://user-images.githubusercontent.com/28184926/168863620-b2ffa708-8c0b-4b90-b81d-45212248b055.png">
+>>>>>>> a9e37096a43f06537b4ffc2213e09a3dbf098e3a
 
 ## 2. redux core concept
 
@@ -56,6 +58,3 @@
     }
   }
   ```
-=======
-<img width="745" alt="Screenshot 2022-05-17 at 19 37 57" src="https://user-images.githubusercontent.com/28184926/168863620-b2ffa708-8c0b-4b90-b81d-45212248b055.png">
->>>>>>> a9e37096a43f06537b4ffc2213e09a3dbf098e3a
