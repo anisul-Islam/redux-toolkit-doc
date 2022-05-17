@@ -80,3 +80,22 @@
     }
   };
   ```
+
+- Store: It holds the states. It has 3 important methods- getState(), dispatch(), suscribe()
+
+  ```js
+  // 4. store - getState(), dispatch(), subscribe()
+
+  // create store
+  const store = createStore(counterReducer);
+
+  store.subscribe(() => {
+    console.log(store.getState());
+  });
+
+  // dispatch action
+  store.dispatch(incrementCounter());
+  store.dispatch(incrementCounter());
+  store.dispatch(incrementCounter());
+  store.dispatch(decrementCounter());
+  ```
