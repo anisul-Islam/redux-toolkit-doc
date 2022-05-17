@@ -327,6 +327,8 @@
 
 ## 6. Middleware
 
+- for extra features, middlepoint of dispatching an action and handledby reducer, performing async tasks, login etc.
+- Example of popular redux middlewares packages: redux-logger, redux-thunk
 - `npm install redux-logger`
 - example
 
