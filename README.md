@@ -698,7 +698,7 @@
       }
     };
   ```
-  - step 4: create reducer -> src/services/reducers/todosReducer.js
+- step 4: create reducer -> src/services/reducers/todosReducer.js
   ```js
       import {
         GET_TODOS_FAILED,
