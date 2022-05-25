@@ -794,8 +794,8 @@
                 todos.map((todo) => {
                   return (
                     <article key={todo.id}>
-                      <h4>{todo.title}</h4>
-                      <p>{todo.body}</p>
+                      <h4>{todo.id}</h4>
+                      <p>{todo.title}</p>
                     </article>
                   );
                 })}
