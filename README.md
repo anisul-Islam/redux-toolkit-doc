@@ -808,6 +808,7 @@ export default Todos;
 ```
 
 - step 8: adding style -> src/App.css
+
   ```css
       section {
       display: grid;
