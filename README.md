@@ -1,4 +1,5 @@
 # Redux-ReduxToolkit Tutorial
+video playlist link here: https://youtube.com/playlist?list=PLgH5QX0i9K3pe7Z7ATcyLdUW3grE4Vfld
 
 ## 1. Introduction to Redux
 
