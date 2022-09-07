@@ -1,4 +1,12 @@
-# Redux-ReduxToolkit Tutorial
+<style>
+  .heading1 {
+    color: red;
+    font-weight:700;
+    font-size: 35px;
+}
+</style>
+
+# Redux-ReduxToolkit Tutorial {#identifier .heading1}
 video playlist link here: https://youtube.com/playlist?list=PLgH5QX0i9K3pe7Z7ATcyLdUW3grE4Vfld
 
 ## 1. Introduction to Redux
