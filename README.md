@@ -485,53 +485,56 @@ video playlist link here: https://youtube.com/playlist?list=PLgH5QX0i9K3pe7Z7ATc
 
   store.dispatch(fetchData());
   ```
-  
+
   ## 8. React-redux counter example
+
   - install redux and react-redux package
   - we will make a counter app; first we will build with state and then we will do this with react-redux. example
-     ```js
-        // App.js
-        import React, { useState } from "react";
 
-        // state - count:0
-        // action - increment, decrement, reset
-        /*
-        reducer - handle logic for state update
-         count => count + 1
-         count => count - 1
-         count => 0
-        */
+    ```js
+    // App.js
+    import React, { useState } from "react";
 
-        const App = () => {
-          const [count, setCount] = useState(0);
+    // state - count:0
+    // action - increment, decrement, reset
+    /*
+       reducer - handle logic for state update
+        count => count + 1
+        count => count - 1
+        count => 0
+       */
 
-          const handleIncrement = () => {
-            setCount((count) => count + 1);
-          };
+    const App = () => {
+      const [count, setCount] = useState(0);
 
-          const handleReset = () => {
-            setCount(0);
-          };
+      const handleIncrement = () => {
+        setCount((count) => count + 1);
+      };
 
-          const handleDecrement = () => {
-            setCount((count) => count - 1);
-          };
+      const handleReset = () => {
+        setCount(0);
+      };
 
-          return (
-            <div>
-              <h1>React Redux Example</h1>
-              <h2>Count : {count}</h2>
-              <button onClick={handleIncrement}>Increment</button>
-              <button onClick={handleReset}>Reset</button>
-              <button onClick={handleDecrement}>Decrement</button>
-            </div>
-          );
-        };
+      const handleDecrement = () => {
+        setCount((count) => count - 1);
+      };
 
-        export default App;
-        
-      ```
+      return (
+        <div>
+          <h1>React Redux Example</h1>
+          <h2>Count : {count}</h2>
+          <button onClick={handleIncrement}>Increment</button>
+          <button onClick={handleReset}>Reset</button>
+          <button onClick={handleDecrement}>Decrement</button>
+        </div>
+      );
+    };
+
+    export default App;
+    ```
+
 - now we will make the same counter app using react-redux
+
   ```js
     // step 1: create constants
     //services/constants/counterConstants.js
@@ -539,7 +542,7 @@ video playlist link here: https://youtube.com/playlist?list=PLgH5QX0i9K3pe7Z7ATc
       export const RESET = "RESET";
       export const DECREMENT = "DECREMENT";
 
-    // step 2: create actions 
+    // step 2: create actions
     //services/actions/counterActions.js
     // action - increment, decrement, reset
 
@@ -562,9 +565,9 @@ video playlist link here: https://youtube.com/playlist?list=PLgH5QX0i9K3pe7Z7ATc
           type: DECREMENT,
         };
       };
-      
-      
-      // step 3: create reducers 
+
+
+      // step 3: create reducers
       //services/reducers/counterReducer.js
           /*
         reducer - handle logic for state update
@@ -608,7 +611,7 @@ video playlist link here: https://youtube.com/playlist?list=PLgH5QX0i9K3pe7Z7ATc
           import counterReducer from "./services/reducers/counterReducer";
           const store = createStore(counterReducer);
           export default store;
-          
+
        // step 5: provide store in index.js
        // npm install react-redux
           import React from "react";
@@ -671,295 +674,319 @@ video playlist link here: https://youtube.com/playlist?list=PLgH5QX0i9K3pe7Z7ATc
         // useSelector, useDispatch
 
   ```
+
 ## 9. API calling in react-redux
+
 - step 1: setup project & install packages `npm install redux react-redux redux-thunk axios`
 - step 2: define constants-> src/services/constants/todosConstant.js
+
 ```js
-    export const GET_TODOS_REQUEST = "GET_TODOS_REQUEST";
-    export const GET_TODOS_SUCCESS = "GET_TODOS_SUCCESS";
-    export const GET_TODOS_FAILED = "GET_TODOS_FAILED";
+export const GET_TODOS_REQUEST = "GET_TODOS_REQUEST";
+export const GET_TODOS_SUCCESS = "GET_TODOS_SUCCESS";
+export const GET_TODOS_FAILED = "GET_TODOS_FAILED";
 ```
+
 - step 3: create async action creator -> src/services/actions/todosAction.js
+
   ```js
-      import {
-      GET_TODOS_FAILED,
-      GET_TODOS_REQUEST,
-      GET_TODOS_SUCCESS,
-    } from "../constants/todosConstant";
+  import {
+    GET_TODOS_FAILED,
+    GET_TODOS_REQUEST,
+    GET_TODOS_SUCCESS,
+  } from "../constants/todosConstant";
 
-    import axios from "axios";
+  import axios from "axios";
 
-    export const getAllTodos = () => async (dispatch) => {
-      dispatch({ type: GET_TODOS_REQUEST });
-      try {
-        const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
-        dispatch({ type: GET_TODOS_SUCCESS, payload: res.data });
-      } catch (error) {
-        dispatch({ type: GET_TODOS_FAILED, payload: error.message });
-      }
-    };
+  export const getAllTodos = () => async (dispatch) => {
+    dispatch({ type: GET_TODOS_REQUEST });
+    try {
+      const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
+      dispatch({ type: GET_TODOS_SUCCESS, payload: res.data });
+    } catch (error) {
+      dispatch({ type: GET_TODOS_FAILED, payload: error.message });
+    }
+  };
   ```
+
 - step 4: create reducer -> src/services/reducers/todosReducer.js
+
   ```js
-      import {
-        GET_TODOS_FAILED,
-        GET_TODOS_REQUEST,
-        GET_TODOS_SUCCESS,
-      } from "../constants/todosConstant";
+  import {
+    GET_TODOS_FAILED,
+    GET_TODOS_REQUEST,
+    GET_TODOS_SUCCESS,
+  } from "../constants/todosConstant";
 
-      const initialState = {
-        isLoading: false,
-        todos: [],
-        error: null,
-      };
+  const initialState = {
+    isLoading: false,
+    todos: [],
+    error: null,
+  };
 
-      export const todosReducer = (state = initialState, action) => {
-        switch (action.type) {
-          case GET_TODOS_REQUEST:
-            return {
-              ...state,
-              isLoading: true,
-            };
-          case GET_TODOS_SUCCESS:
-            return {
-              isLoading: false,
-              todos: action.payload,
-              error: null,
-            };
-          case GET_TODOS_FAILED:
-            return {
-              isLoading: false,
-              todos: [],
-              error: action.payload,
-            };
+  export const todosReducer = (state = initialState, action) => {
+    switch (action.type) {
+      case GET_TODOS_REQUEST:
+        return {
+          ...state,
+          isLoading: true,
+        };
+      case GET_TODOS_SUCCESS:
+        return {
+          isLoading: false,
+          todos: action.payload,
+          error: null,
+        };
+      case GET_TODOS_FAILED:
+        return {
+          isLoading: false,
+          todos: [],
+          error: action.payload,
+        };
 
-          default:
-            return state;
-        }
-      };
-
+      default:
+        return state;
+    }
+  };
   ```
+
 - step 5: create store -> src/store.js
+
   ```js
-      import { applyMiddleware, createStore } from "redux";
-      import thunk from "redux-thunk";
-      import { todosReducer } from "./services/reducers/todosReducer";
+  import { applyMiddleware, createStore } from "redux";
+  import thunk from "redux-thunk";
+  import { todosReducer } from "./services/reducers/todosReducer";
 
-      const store = createStore(todosReducer, applyMiddleware(thunk));
-      export default store;
+  const store = createStore(todosReducer, applyMiddleware(thunk));
+  export default store;
   ```
+
 - step 6: provide store -> src/index.js
-    ```js
-      import React from "react";
-      import ReactDOM from "react-dom/client";
-      import "./index.css";
-      import App from "./App";
-      import reportWebVitals from "./reportWebVitals";
 
-      import { Provider } from "react-redux";
-      import store from "./store";
+  ```js
+  import React from "react";
+  import ReactDOM from "react-dom/client";
+  import "./index.css";
+  import App from "./App";
+  import reportWebVitals from "./reportWebVitals";
 
-      const root = ReactDOM.createRoot(document.getElementById("root"));
+  import { Provider } from "react-redux";
+  import store from "./store";
 
-      root.render(
-        <Provider store={store}>
-          <App />
-        </Provider>
-      );
-      reportWebVitals();
+  const root = ReactDOM.createRoot(document.getElementById("root"));
 
-    ```
- - step 7: use store -> src/components/Todos.js
-    ```js
-      import React, { useEffect } from "react";
-      import { useDispatch, useSelector } from "react-redux";
-      import { getAllTodos } from "../services/actions/todosAction";
+  root.render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  reportWebVitals();
+  ```
 
-      const Todos = () => {
-        const { isLoading, todos, error } = useSelector((state) => state);
+- step 7: use store -> src/components/Todos.js
 
-        console.log(isLoading);
+  ```js
+  import React, { useEffect } from "react";
+  import { useDispatch, useSelector } from "react-redux";
+  import { getAllTodos } from "../services/actions/todosAction";
 
-        const dispatch = useDispatch();
-        useEffect(() => {
-          dispatch(getAllTodos());
-        }, []);
+  const Todos = () => {
+    const { isLoading, todos, error } = useSelector((state) => state);
 
-        return (
-          <div>
-            <h2>Todos App</h2>
-            {isLoading && <h3>Loading ...</h3>}
-            {error && <h3>{error.message}</h3>}
-            <section>
-              {todos &&
-                todos.map((todo) => {
-                  return (
-                    <article key={todo.id}>
-                      <h4>{todo.id}</h4>
-                      <p>{todo.title}</p>
-                    </article>
-                  );
-                })}
-            </section>
-          </div>
-        );
-      };
+    console.log(isLoading);
 
-export default Todos;
-```
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(getAllTodos());
+    }, []);
+
+    return (
+      <div>
+        <h2>Todos App</h2>
+        {isLoading && <h3>Loading ...</h3>}
+        {error && <h3>{error.message}</h3>}
+        <section>
+          {todos &&
+            todos.map((todo) => {
+              return (
+                <article key={todo.id}>
+                  <h4>{todo.id}</h4>
+                  <p>{todo.title}</p>
+                </article>
+              );
+            })}
+        </section>
+      </div>
+    );
+  };
+  export default Todos;
+  ```
 
 - step 8: adding style -> src/App.css
 
   ```css
-      section {
-      display: grid;
-      grid-gap: 0.5rem;
-      padding: 1rem;
-    }
+  section {
+    display: grid;
+    grid-gap: 0.5rem;
+    padding: 1rem;
+  }
 
-    article {
-      background-color: #293462;
-      color: white;
-      padding: 0.5rem;
-    }
+  article {
+    background-color: #293462;
+    color: white;
+    padding: 0.5rem;
+  }
 
-    @media (min-width: 600px) {
-      section {
-        grid-template-columns: auto auto;
-      }
+  @media (min-width: 600px) {
+    section {
+      grid-template-columns: auto auto;
     }
-    @media (min-width: 768px) {
-      section {
-        grid-template-columns: auto auto auto;
-      }
+  }
+  @media (min-width: 768px) {
+    section {
+      grid-template-columns: auto auto auto;
     }
-
+  }
   ```
- ## 10. redux-toolkit counter app
- - step1: install packages -> `npm install @reduxjs/toolkit react-redux`
- - step2: create a recommended folder structure for redux-toolkit
-          - features (contains individual feature of our app)
-          - app (contains store of our app)
- - step3: create slice. collection of logic for a feature is called slices in redux.
-          - src/features/counter/counterSlice
-          ```js
-          import { createSlice } from "@reduxjs/toolkit";
 
-          // state: count:0
-          // increment, decrement, reset
+## 10. redux-toolkit counter app
 
-          // const incrementCounter = () => {
-          //   return { type: "INCREMENT" };
-          // };
+- step1: install packages -> `npm install @reduxjs/toolkit react-redux`
+- step2: create a recommended folder structure for redux-toolkit - features (contains individual feature of our app) - app (contains store of our app)
+- step3: create slice. collection of logic for a feature is called slices in redux. - src/features/counter/counterSlice
 
-          export const counterSlice = createSlice({
-            name: "counter",
-            initialState: { count: 0 },
-            reducers: {
-              increment: (state) => {
-                state.count = state.count + 1;
-              },
-              decrement: (state) => {
-                state.count = state.count - 1;
-              },
-              reset: (state) => {
-                state.count = 0;
-              },
-              increaseByAmount: (state, action) => {
-                state.count = state.count + action.payload;
-              },
-            },
-          });
+  ```js
+  import { createSlice } from "@reduxjs/toolkit";
 
-          // export reducer and action createor
-          // Action creators are generated for each case reducer function
-          export const { increment, decrement, reset, increaseByAmount } =
-            counterSlice.actions;
+  // state: count:0
+  // increment, decrement, reset
 
-          export default counterSlice.reducer;
+  // const incrementCounter = () => {
+  //   return { type: "INCREMENT" };
+  // };
 
-          ```
- - step4: create store -> app/store.js
-         ```js
-            import { configureStore } from "@reduxjs/toolkit";
+  export const counterSlice = createSlice({
+    name: "counter",
+    initialState: { count: 0 },
+    reducers: {
+      increment: (state) => {
+        state.count = state.count + 1;
+      },
+      decrement: (state) => {
+        state.count = state.count - 1;
+      },
+      reset: (state) => {
+        state.count = 0;
+      },
+      increaseByAmount: (state, action) => {
+        state.count = state.count + action.payload;
+      },
+    },
+  });
 
-            import counterReducer from "../features/counter/counterSlice";
+  // export reducer and action createor
+  // Action creators are generated for each case reducer function
+  export const { increment, decrement, reset, increaseByAmount } =
+    counterSlice.actions;
 
-            const store = configureStore({
-              reducer: {
-                counter: counterReducer,
-              },
-            });
-            export default store;
-         ```
- - step5: provide store in root file -> src/index.js
-         ```js
-            import React from 'react';
-            import ReactDOM from 'react-dom/client';
-            import './index.css';
-            import App from './App';
-            import reportWebVitals from './reportWebVitals';
-            import { Provider } from 'react-redux';
+  export default counterSlice.reducer;
+  ```
 
-            import store from './app/store';
+- step4: create store -> app/store.js
 
-            const root = ReactDOM.createRoot(document.getElementById('root'));
-            root.render(
-              <Provider store={store}>
-                <App />
-              </Provider>
-            );
+  ```js
+  import { configureStore } from "@reduxjs/toolkit";
 
-         ```
- - step6: use store & dispatch actions 
-        ```js
-           import React from "react";
-          import { useDispatch, useSelector } from "react-redux";
-          import { decrement, increaseByAmount, increment, reset } from "./counterSlice";
+  import counterReducer from "../features/counter/counterSlice";
 
-          const CounterView = () => {
-            const count = useSelector((state) => state.counter.count);
+  const store = configureStore({
+    reducer: {
+      counter: counterReducer,
+    },
+  });
+  export default store;
+  ```
 
-            const dispatch = useDispatch();
+- step5: provide store in root file -> src/index.js
 
-            return (
-              <div>
-                <h2>Counter: {count}</h2>
-                <button
-                  onClick={() => {
-                    dispatch(increment());
-                  }}
-                >
-                  Increment
-                </button>
-                <button
-                  onClick={() => {
-                    dispatch(reset());
-                  }}
-                >
-                  reset
-                </button>
-                <button
-                  onClick={() => {
-                    dispatch(decrement());
-                  }}
-                >
-                  Decrement
-                </button>
-                <button
-                  onClick={() => {
-                    dispatch(increaseByAmount(5));
-                  }}
-                >
-                  IncrementBy5
-                </button>
-              </div>
-            );
-          };
+  ```js
+  import React from "react";
+  import ReactDOM from "react-dom/client";
+  import "./index.css";
+  import App from "./App";
+  import reportWebVitals from "./reportWebVitals";
+  import { Provider } from "react-redux";
 
-          export default CounterView;
+  import store from "./app/store";
 
-        ```
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  ```
+
+- step6: use store & dispatch actions
+
+  ```js
+  import React from "react";
+  import { useDispatch, useSelector } from "react-redux";
+  import {
+    decrement,
+    increaseByAmount,
+    increment,
+    reset,
+  } from "./counterSlice";
+
+  const CounterView = () => {
+    const count = useSelector((state) => state.counter.count);
+
+    const dispatch = useDispatch();
+
+    return (
+      <div>
+        <h2>Counter: {count}</h2>
+        <button
+          onClick={() => {
+            dispatch(increment());
+          }}
+        >
+          Increment
+        </button>
+        <button
+          onClick={() => {
+            dispatch(reset());
+          }}
+        >
+          reset
+        </button>
+        <button
+          onClick={() => {
+            dispatch(decrement());
+          }}
+        >
+          Decrement
+        </button>
+        <button
+          onClick={() => {
+            dispatch(increaseByAmount(5));
+          }}
+        >
+          IncrementBy5
+        </button>
+      </div>
+    );
+  };
+
+  export default CounterView;
+  ```
+
 ## 11. API calling using redux-toolkit in react
+
 ## 12. CRUD APP using redux-toolkit in react
+
 - project code in github: https://github.com/anisul-Islam/redux-toolkit-crud-app
+
+```
+
+```
