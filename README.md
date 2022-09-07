@@ -6,7 +6,7 @@
 }
 </style>
 
-# Redux-ReduxToolkit Tutorial {#identifier .heading1}
+<h1 class="heading1"> Redux-ReduxToolkit Tutorial </h1>
 video playlist link here: https://youtube.com/playlist?list=PLgH5QX0i9K3pe7Z7ATcyLdUW3grE4Vfld
 
 ## 1. Introduction to Redux
