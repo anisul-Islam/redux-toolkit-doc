@@ -1,11 +1,3 @@
-<style>
-  .heading1 {
-    color: red;
-    font-weight:700;
-    font-size: 35px;
-}
-</style>
-
 <h1 class="heading1"> Redux-ReduxToolkit Tutorial </h1>
 video playlist link here: https://youtube.com/playlist?list=PLgH5QX0i9K3pe7Z7ATcyLdUW3grE4Vfld
 
