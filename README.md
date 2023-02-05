@@ -1025,6 +1025,21 @@ const postSlice = createSlice({
 export default postSlice.reducer;
 ```
 
+-   step4: create store and use **postSlice** as **postReducer** -> app/store.js
+
+```js
+import { configureStore } from '@reduxjs/toolkit';
+
+import postReducer from '../features/posts/postSlice';
+
+const store = configureStore({
+    reducer: {
+        posts: postReducer
+    }
+});
+export default store;
+```
+
 ## 12. CRUD APP using redux-toolkit in react
 
 -   project code in github: <https://github.com/anisul-Islam/redux-toolkit-crud-app>
