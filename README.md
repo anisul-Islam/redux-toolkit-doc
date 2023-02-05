@@ -1040,6 +1040,26 @@ const store = configureStore({
 export default store;
 ```
 
+-   step5: provide store in root file -> src/index.js
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+
+import store from './app/store';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+);
+```
+
 ## 12. CRUD APP using redux-toolkit in react
 
 -   project code in github: <https://github.com/anisul-Islam/redux-toolkit-crud-app>
